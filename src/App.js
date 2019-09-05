@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from "react-dom"
 import TodoList from './components/TodoComponents/TodoList.js'
+import TodoForm from './components/TodoComponents/TodoForm.js'
+
 
 import "./components/TodoComponents/Todo.css";
 
@@ -25,6 +27,18 @@ class App extends React.Component {
     };
   }
   
+  addItem = (e, itemName) => {
+    e.preventDefault();
+    const newItem = {
+      task: itemName,
+      id: Date.now(),
+      completed: false
+    }
+    this.setState({
+      tasks: [...this.state.tasks, newItem]
+    })
+  }
+
   toggleItem = itemId => {
     console.log(itemId)
     this.setState({
@@ -41,7 +55,7 @@ class App extends React.Component {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <input />
+        <TodoForm addItem ={this.addItem} />
         <TodoList 
           tasks={this.state.tasks} 
           toggleItem={this.toggleItem}
