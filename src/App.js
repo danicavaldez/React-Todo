@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from "react-dom"
 import TodoList from './components/TodoComponents/TodoList.js'
 
+import "./components/TodoComponents/Todo.css";
+
 const tasks = [
   {
     task: 'Organize Garage',
@@ -25,6 +27,14 @@ class App extends React.Component {
   
   toggleItem = itemId => {
     console.log(itemId)
+    this.setState({
+      tasks: this.state.tasks.map(item => {
+        if (item.id === itemId) {
+          return {...item, completed: !item.completed}
+        }
+        return item;
+      })
+    });
   }
 
   render() {
